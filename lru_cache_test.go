@@ -6,6 +6,7 @@ import (
 )
 
 func TestLRUCache(t *testing.T) {
+	// test purging based on cache expiration
 	lruCache := NewLRUCache[int, string](time.Second, 1)
 
 	lruCache.Set(1, "1")
@@ -40,4 +41,6 @@ func TestLRUCache(t *testing.T) {
 	if _, ok := lruCache.Get(3); !ok {
 		t.Error("lruCache.Get should return ok for values more recent than the average after reaping")
 	}
+
+	lruCache.StopReaping()
 }
