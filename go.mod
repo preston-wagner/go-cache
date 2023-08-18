@@ -1,4 +1,4 @@
-module github.com/preston-wagner/go-cache
+module github.com/nuvi/go-cache
 
 go 1.20
 
