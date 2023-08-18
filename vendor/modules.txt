@@ -1,6 +1,6 @@
+# github.com/nuvi/unicycle v0.4.2
+## explicit; go 1.20
+github.com/nuvi/unicycle
 # github.com/pbnjay/memory v0.0.0-20210728143218-7b4eea64cf58
 ## explicit; go 1.16
 github.com/pbnjay/memory
-# github.com/preston-wagner/unicycle v0.4.3
-## explicit; go 1.20
-github.com/preston-wagner/unicycle

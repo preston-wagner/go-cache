@@ -3,7 +3,7 @@ package cache
 import (
 	"time"
 
-	"github.com/preston-wagner/unicycle"
+	"github.com/nuvi/unicycle"
 )
 
 func WrapWithTLRUCache[KEY_TYPE comparable, VALUE_TYPE any](getter Getter[KEY_TYPE, VALUE_TYPE], ttl time.Duration, memoryLimit float64) Getter[KEY_TYPE, VALUE_TYPE] {
