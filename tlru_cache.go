@@ -78,10 +78,11 @@ func (tlruCache *TLRUCache[KEY_TYPE, VALUE_TYPE]) StartReaping() {
 	go func() {
 		ticker := time.NewTicker(time.Second)
 		select {
-		case <-tlruCache.done:
-			return
 		case <-ticker.C:
 			tlruCache.Reap()
+		case <-tlruCache.done:
+			ticker.Stop()
+			return
 		}
 	}()
 }

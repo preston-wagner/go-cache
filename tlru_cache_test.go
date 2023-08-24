@@ -6,7 +6,7 @@ import (
 )
 
 func TestTLRUCache(t *testing.T) {
-	// test purging based on cache expiration
+	// test purging based on TTL expiration
 	TLRUCache := NewTLRUCache[int, string](time.Second, 1)
 
 	TLRUCache.Set(1, "1")
