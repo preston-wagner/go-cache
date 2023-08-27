@@ -1,3 +1,3 @@
-# github.com/nuvi/unicycle v0.4.4
+# github.com/preston-wagner/unicycle v0.4.4
 ## explicit; go 1.20
-github.com/nuvi/unicycle
+github.com/preston-wagner/unicycle

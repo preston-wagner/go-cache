@@ -1,5 +1,5 @@
-module github.com/nuvi/go-cache
+module github.com/preston-wagner/go-cache
 
 go 1.20
 
-require github.com/nuvi/unicycle v0.4.4
+require github.com/preston-wagner/unicycle v0.4.4

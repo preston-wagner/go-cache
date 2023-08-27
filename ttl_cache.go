@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/nuvi/unicycle"
+	"github.com/preston-wagner/unicycle"
 )
 
 type ttlCacheValue[VALUE_TYPE any] struct {
