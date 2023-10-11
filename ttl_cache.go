@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/preston-wagner/unicycle"
+	"github.com/preston-wagner/unicycle/multithread"
 )
 
 type ttlCacheValue[VALUE_TYPE any] struct {
@@ -72,7 +72,7 @@ func (ttlCache *TTLCache[KEY_TYPE, VALUE_TYPE]) Remove(key KEY_TYPE) {
 }
 
 func (ttlCache *TTLCache[KEY_TYPE, VALUE_TYPE]) StartReaping() {
-	ttlCache.canceller = unicycle.Repeat(ttlCache.Reap, ttlCache.reapFrequency, false)
+	ttlCache.canceller = multithread.Repeat(ttlCache.Reap, ttlCache.reapFrequency, false)
 }
 
 func (ttlCache *TTLCache[KEY_TYPE, VALUE_TYPE]) StopReaping() {

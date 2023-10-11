@@ -1,3 +1,7 @@
-# github.com/preston-wagner/unicycle v0.4.4
+# github.com/preston-wagner/unicycle v0.6.3
 ## explicit; go 1.20
-github.com/preston-wagner/unicycle
+github.com/preston-wagner/unicycle/channels
+github.com/preston-wagner/unicycle/defaults
+github.com/preston-wagner/unicycle/multithread
+github.com/preston-wagner/unicycle/promises
+github.com/preston-wagner/unicycle/slices
