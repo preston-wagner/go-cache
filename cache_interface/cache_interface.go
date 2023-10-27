@@ -1,4 +1,4 @@
-package cache
+package cache_interface
 
 type Cache[KEY_TYPE comparable, VALUE_TYPE any] interface {
 	Set(key KEY_TYPE, value VALUE_TYPE)
@@ -7,9 +7,7 @@ type Cache[KEY_TYPE comparable, VALUE_TYPE any] interface {
 }
 
 type ReapedCache[KEY_TYPE comparable, VALUE_TYPE any] interface {
-	Set(key KEY_TYPE, value VALUE_TYPE)
-	Get(key KEY_TYPE) (VALUE_TYPE, bool)
-	Remove(key KEY_TYPE)
+	Cache[KEY_TYPE, VALUE_TYPE]
 	StartReaping()
 	StopReaping()
 	Reap()

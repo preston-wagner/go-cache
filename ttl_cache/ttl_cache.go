@@ -1,4 +1,4 @@
-package cache
+package ttl_cache
 
 import (
 	"sync"
@@ -72,11 +72,14 @@ func (ttlCache *TTLCache[KEY_TYPE, VALUE_TYPE]) Remove(key KEY_TYPE) {
 }
 
 func (ttlCache *TTLCache[KEY_TYPE, VALUE_TYPE]) StartReaping() {
+	ttlCache.StopReaping()
 	ttlCache.canceller = multithread.Repeat(ttlCache.Reap, ttlCache.reapFrequency, false)
 }
 
 func (ttlCache *TTLCache[KEY_TYPE, VALUE_TYPE]) StopReaping() {
-	ttlCache.canceller()
+	if ttlCache.canceller != nil {
+		ttlCache.canceller()
+	}
 }
 
 func (ttlCache *TTLCache[KEY_TYPE, VALUE_TYPE]) Reap() {
