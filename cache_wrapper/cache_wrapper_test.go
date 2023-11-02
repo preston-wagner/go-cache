@@ -1,40 +1,17 @@
 package cache_wrapper_test
 
 import (
-	"strconv"
 	"testing"
 	"time"
 
+	"github.com/preston-wagner/go-cache/cache_test"
 	"github.com/preston-wagner/go-cache/cache_wrapper"
 	"github.com/preston-wagner/go-cache/ttl_cache"
-	"github.com/preston-wagner/unicycle/sets"
 )
-
-func itoaOnce(t *testing.T) func(int) string {
-	keys := sets.Set[int]{}
-	return func(key int) string {
-		if keys.Has(key) {
-			t.Error("wrapped function was called with the same key multiple times!")
-		}
-		keys.Add(key)
-		return strconv.Itoa(key)
-	}
-}
-
-func atoiOnce(t *testing.T) func(string) (int, error) {
-	keys := sets.Set[string]{}
-	return func(key string) (int, error) {
-		if keys.Has(key) {
-			t.Error("wrapped function was called with the same key multiple times!")
-		}
-		keys.Add(key)
-		return strconv.Atoi(key)
-	}
-}
 
 func TestWrapWithCache(t *testing.T) {
 	wrappedGetter := cache_wrapper.WrapWithCache[int, string](
-		itoaOnce(t),
+		cache_test.ItoaOnce(t),
 		ttl_cache.NewTTLCache[int, string](time.Second, time.Second*3),
 	)
 	res := wrappedGetter(7)
@@ -49,7 +26,7 @@ func TestWrapWithCache(t *testing.T) {
 
 func TestWrapWithCacheWithUncachedError(t *testing.T) {
 	wrappedGetter := cache_wrapper.WrapWithCacheWithUncachedError[string, int](
-		atoiOnce(t),
+		cache_test.AtoiOnce(t),
 		ttl_cache.NewTTLCache[string, int](time.Second, time.Second*3),
 	)
 	res, err := wrappedGetter("7")
@@ -74,7 +51,7 @@ func TestWrapWithCacheWithUncachedError(t *testing.T) {
 
 func TestWrapWithCacheWithError(t *testing.T) {
 	wrappedGetter := cache_wrapper.WrapWithCacheWithError[string, int](
-		atoiOnce(t),
+		cache_test.AtoiOnce(t),
 		ttl_cache.NewTTLCache[string, int](time.Second, time.Second*3),
 		ttl_cache.NewTTLCache[string, error](time.Second, time.Second*3),
 	)
