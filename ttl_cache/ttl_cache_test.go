@@ -36,6 +36,6 @@ func TestTTLCache(t *testing.T) {
 	time.Sleep(time.Second * 2)
 	_, ok = ttlCache.Get(3)
 	if ok {
-		t.Error("Get should return false for expired value")
+		t.Error("Get should return false for expired value, even when reaping has ceased")
 	}
 }
