@@ -22,6 +22,13 @@ func TestTLRUCache(t *testing.T) {
 		t.Error("tlruCache.Get should not return ok for expired values")
 	}
 
+	tlruCache.Set(2, "2")
+	tlruCache.Remove(2)
+	_, ok := tlruCache.Get(2)
+	if ok {
+		t.Error("Get should not return removed values")
+	}
+
 	tlruCache.StopReaping()
 
 	// test purging based on memory usage
@@ -45,4 +52,14 @@ func TestTLRUCache(t *testing.T) {
 	}
 
 	tlruCache.StopReaping()
+
+	tlruCache = tlru_cache.NewTLRUCache[int, string](time.Second, time.Second, 0)
+	tlruCache.StopReaping()
+	tlruCache.Set(3, "3")
+
+	time.Sleep(time.Second * 2)
+	_, ok = tlruCache.Get(3)
+	if ok {
+		t.Error("Get should return false for expired value, even when reaping has ceased")
+	}
 }
